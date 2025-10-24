@@ -1,4 +1,4 @@
-# Madlibs Python Game
+# Madlibs python game program
 
 adjective1 = input("Enter an adjective (description): ")
 noun1 = input("Enter a noun (person, place, thing): ")
