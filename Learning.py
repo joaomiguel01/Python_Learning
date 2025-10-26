@@ -1,6 +1,4 @@
-online = True
-
-if online:
-    print("This user is online")
-else:
-    print("This user is offline")
+fruits = {2, 7, 8, 1}
+fruits.add(3)
+fruits.remove(2)
+print(fruits)
