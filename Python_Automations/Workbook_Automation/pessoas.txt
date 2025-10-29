@@ -1,0 +1,5 @@
+João Paulo;36;28/10/25;Sushi
+Pedro Albuquerque;54;29/10/25;Lasanha
+Maria Santana;30;30/10/25;Bolo
+Ana Cavalcanti;25;31/10/25;Chocolate
+Wilson Medeiros;19;01/11/25;Alface
