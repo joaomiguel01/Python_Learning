@@ -42,6 +42,12 @@ def display_answer(answer):
     print(" ".join(answer))
 
 
+def display_guessed_lets(guessed_letters):
+    print("Guessed Letters: [", end="")
+    for guess in guessed_letters:
+        print(guess, end=", ")
+    print("]")
+
 
 def main():
     answer = choice(words)
@@ -53,6 +59,7 @@ def main():
     while is_running:
         display_man(wrong_guesses)
         display_hint(hint)
+        display_guessed_lets(guessed_letters)
         guess = input("Enter a letter: ").lower()
 
         if len(guess) != 1 or not guess.isalpha():
