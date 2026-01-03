@@ -18,7 +18,7 @@ def main():
 
 
             if choice == 1:
-                # Register Users
+                # Register User
                 title("NOVO CADASTRO DE USUÁRIO")
                 name = read_name("Nome: ")
                 year_age = read_int("Ano de Nascimento: ")
