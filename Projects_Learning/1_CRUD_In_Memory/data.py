@@ -1,4 +1,5 @@
 from datetime import date
+from utils import read_option, read_float, read_name, read_int
 
 # Classes
 class User:
@@ -80,8 +81,29 @@ def read_user(repository: list, name: str):
     raise LookupError("User not found")
 
 
+def delete_user(repository: list):
+    if not repository:
+        raise ValueError("Repository is empty")
+
+    index = read_option("Digite o ID a ser deletado: ", len(repository))
+    repository.pop((index-1))
+
+
+def update_user(repository: list):
+    if not repository:
+        raise ValueError("Repository is empty")
+
+    index = read_option("Digite o ID a ser atualizado: ", len(repository))
+    name = read_name("Nome: ")
+    year_age = read_int("Ano de Nascimento: ")
+    weight = read_float("Peso: ")
+    height = read_float("Altura: ")
+    repository[(index-1)] = User(name, year_age, weight, height)
+
+
 def print_data(repository: list):
     print(f"{' ID':^3} | {'NOME':<20} | {'PESO':<7} | {'ALTURA':<7} | {'IDADE':<3}")
     print("-"*57)
     for index, user in enumerate(repository, start=1):
         print(f"{index:^3} | {user.name:<20} | {user.weight:<7.2f} | {user.height:<7.2f} | {str(user.calculate_age):<3} anos")
+

@@ -68,7 +68,7 @@ def read_int(text: str):
 def read_float(text: str):
     while True:
         try:
-            num = input(text)
+            num = input(text).replace(",", ".")
             return float(num)
         except Exception as e:
             print(f"{colors['red']}ERRO: {e}{colors['transparent']}")
