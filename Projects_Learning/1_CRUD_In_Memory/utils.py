@@ -42,3 +42,33 @@ def read_option(text: str, max_value_options: int):
                 print(f"{colors['red']}Dado Inválido! Digite uma opção válida!{colors['transparent']}")
         except ValueError:
             print(f"{colors['red']}Dado Inválido! Digite um número!{colors['transparent']}")
+
+
+def read_name(text: str):
+    while True:
+        try:
+            name = input(text)
+            if name.strip():
+                return name.strip()
+            else:
+                print(f"{colors['red']}ERROR! Digite um nome válido!{colors['transparent']}")
+        except Exception as e:
+            print(f"{colors['red']}ERRO: {e}{colors['transparent']}")
+
+
+def read_int(text: str):
+    while True:
+        try:
+            num = input(text)
+            return int(num)
+        except Exception as e:
+            print(f"{colors['red']}ERRO: {e}{colors['transparent']}")
+
+
+def read_float(text: str):
+    while True:
+        try:
+            num = input(text)
+            return float(num)
+        except Exception as e:
+            print(f"{colors['red']}ERRO: {e}{colors['transparent']}")
