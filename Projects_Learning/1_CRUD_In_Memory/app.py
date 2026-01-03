@@ -1,5 +1,5 @@
 from time import sleep
-from utils import menu, title, read_option, read_name, read_int, read_float
+from gui_utils import menu, title, read_option, read_name, read_int, read_float
 from data import print_data, add_user, User, delete_user, update_user
 
 
@@ -8,7 +8,11 @@ def main():
     while True:
         try:
             print()
-            menu()
+            menu("SISTEMA DE CADASTRO DE USUÁRIOS", options_list=["Cadastrar Usuários",
+                                                                  "Ver Usuários",
+                                                                  "Deletar Usuários",
+                                                                  "Atualizar Usuários",
+                                                                  "Sair do Programa"])
             choice = read_option("Digite sua escolha: ", 5)
             sleep(1)
             print()

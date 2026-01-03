@@ -13,22 +13,13 @@ def title(text: str):
     print("~"*(len(text)+4))
 
 
-def menu():
-    text = "SISTEMA DE CADASTRO DE USUÁRIOS"
-    title(text)
+def menu(title_text: str, options_list: list):
+    title(title_text)
 
-    options = [
-        "Cadastrar Usuários",
-        "Ver Usuários",
-        "Deletar Usuários",
-        "Atualizar Usuários",
-        "Sair do Programa"
-    ]
-
-    for index, option in enumerate(options, start=1):
+    for index, option in enumerate(options_list, start=1):
         print(f"{colors['yellow']}[{index}]{colors['transparent']} {colors['blue']}{option}{colors['transparent']}")
     
-    print('~'*(len(text)+4))
+    print('~'*(len(title_text)+4))
 
 
 # Command utils

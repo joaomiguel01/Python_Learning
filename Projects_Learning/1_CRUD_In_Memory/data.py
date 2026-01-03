@@ -1,5 +1,5 @@
 from datetime import date
-from utils import read_option, read_float, read_name, read_int
+from gui_utils import read_option, read_float, read_name, read_int
 
 # Classes
 class User:
