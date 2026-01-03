@@ -1,7 +1,6 @@
 from time import sleep
-from gui_utils import menu, title, read_option, read_name, read_int, read_float
 from data import print_data, add_user, User, delete_user, update_user
-
+from gui_utils import menu, read_float, read_int, read_name, read_option, title
 
 def main():
     database = []
