@@ -1,7 +1,25 @@
 from gui_utils import menu, read_option, title
 from time import sleep
+import os
+import json
 
 def main():
+    arq = "database.json"
+    if not os.path.exists(arq):
+        try:
+            title(f"CRIANDO ARQUIVO {arq}")
+            with open(arq, "w", encoding="utf-8") as file:
+                json.dump({}, file, indent=4)
+            sleep(1)
+        except Exception as e:
+            title("ERRO AO TENTAR CRIAR O ARQUIVO")
+            print(f"ERRO: {e}")
+        finally:
+            file.close()
+
+    title(f"ARQUIVO {arq} CARREGADO COM SUCESSO!")
+    sleep(1)
+
     while True:
         try:
             menu("SISTEMA DE CADASTRO DE ALUNOS", 
