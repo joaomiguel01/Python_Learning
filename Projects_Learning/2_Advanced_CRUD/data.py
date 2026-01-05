@@ -102,3 +102,12 @@ def add_student(arq: str, student: Student):
 
     with open(arq, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
+
+
+def print_data(arq: str):
+    with open(arq, "r", encoding="utf-8") as file:
+        data = json.load(file)
+    
+    for stud in data:
+        print(f"{stud['id']:^5} | {stud['name']:<20} | {str(stud['age']):^5} | ", end="")
+        print(f"{str(stud['grades']):<20} | {stud['media']:<7.2f} | {stud['std']:<7.2f}")

@@ -1,0 +1,14 @@
+[
+    {
+        "id": 13221,
+        "name": "Pedro Marques",
+        "birth_year": 1995,
+        "age": 31,
+        "grades": [
+            7.5,
+            8.0
+        ],
+        "media": 7.75,
+        "std": 0.25
+    }
+]

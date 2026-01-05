@@ -1,5 +1,5 @@
 from gui_utils import menu, read_option, title,read_float, read_int, read_name
-from data import add_student, Student
+from data import add_student, Student, print_data
 from time import sleep
 import os
 import json
@@ -50,7 +50,10 @@ def main():
                     title("ALUNO CADASTRADO COM SUCESSO!")
                 case 2:
                     # List Students
-                    pass
+                    title("LISTA DE ESTUDANTES CADASTRADOS")
+                    print(f"{'ID':^5} | {'NOME':<20} | {'IDADE':<3} | {'NOTAS':<20} | {'MÉDIA':<7} | {'DESVIO P.':<7}")
+                    print("-"*85)
+                    print_data(arq)
                 case 3:
                     # Delete Student
                     pass
