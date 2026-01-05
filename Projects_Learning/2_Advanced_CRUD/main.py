@@ -1,29 +1,15 @@
 from gui_utils import menu, read_option, title,read_float, read_int, read_name
-from data import add_student, Student, print_data
+from data import add_student, Student, print_data, is_database_exists, grab_data, delete_student, update_student
 from time import sleep
-import os
-import json
 
 def main():
     arq = "database.json"
-
-    if not os.path.exists(arq):
-        try:
-            title(f"CRIANDO ARQUIVO {arq}")
-            with open(arq, "w", encoding="utf-8") as file:
-                json.dump([], file, indent=4)
-            sleep(1)
-        except Exception as e:
-            title("ERRO AO TENTAR CRIAR O ARQUIVO")
-            print(f"ERRO: {e}")
-        finally:
-            file.close()
-
-    title(f"ARQUIVO {arq} CARREGADO COM SUCESSO!")
+    is_database_exists(arq)
     sleep(1)
 
     while True:
         try:
+            print()
             menu("SISTEMA DE CADASTRO DE ALUNOS", 
                  
                  ["Cadastrar Aluno",
@@ -34,7 +20,6 @@ def main():
             
             choice = read_option("Digite sua escolha: ", 5)
             sleep(1)
-            print()
 
             match choice:
                 case 1:
@@ -50,16 +35,36 @@ def main():
                     title("ALUNO CADASTRADO COM SUCESSO!")
                 case 2:
                     # List Students
-                    title("LISTA DE ESTUDANTES CADASTRADOS")
-                    print(f"{'ID':^5} | {'NOME':<20} | {'IDADE':<3} | {'NOTAS':<20} | {'MÉDIA':<7} | {'DESVIO P.':<7}")
-                    print("-"*85)
                     print_data(arq)
                 case 3:
                     # Delete Student
-                    pass
+                    if grab_data(arq):
+                        title("PROCEDIMENTO DE DELEÇÃO")
+                        sleep(1)
+                        print_data(arq)
+                        id_deleter = read_int("\nDigite o ID do aluno a ser deletado: ")
+                        sleep(1)
+
+                        delete_student(id_deleter, arq)
+                    else:
+                        raise ValueError("ERROR: database is empty")
                 case 4:
                     # Update Student
-                    pass
+                    if grab_data(arq):
+                        title("PROCEDIMENTO DE ATUALIZAÇÃO")
+                        sleep(1)
+                        print_data(arq)
+                        print()
+                        id_updater = read_int("\nDigite o ID do aluno a ser atualizado: ")
+                        menu("PROPRIEDADES DO ALUNO PARA ATUALIZAR", ["ID",
+                                                                      "NOME",
+                                                                      "ANO DE NASCIMENTO",
+                                                                      "NOTAS"])
+                        op_updater = read_option("\nDigite a opção a ser atualizada: ", 4)
+
+                        update_student(id_updater, op_updater, arq)
+                    else:
+                        raise ValueError("ERROR: database is empty")
                 case 5:
                     # Exit Program
                     title("SAINDO DO SISTEMA...")
@@ -68,7 +73,7 @@ def main():
                     break
         except Exception as e:
             title("HOUVE UM ERRO AO REALIZAR O PROCEDIMENTO DESEJADO")
-            print(f"ERRO: {e}")
+            print(f"{e}")
             sleep(1)
 
 if __name__ == "__main__":
