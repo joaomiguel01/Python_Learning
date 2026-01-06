@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "code": "BA1564",
+        "name": "JARRO DE BARRO",
+        "price": 25.0,
+        "qtd": 38
+    },
+    {
+        "code": "UI8975",
+        "name": "MOUSEPAD",
+        "price": 30.0,
+        "qtd": 70
+    }
+]
