@@ -1,4 +1,4 @@
-from gui_utils import title, menu, read_option, read_float, read_int, read_name
+from utils_module_u import title, menu, read_option, read_float, read_int, read_name
 from time import sleep
 from database import ensure_exists_file, add_product, Product, print_data, delete_product, grab_data, update_product
 

@@ -1,4 +1,4 @@
-from gui_utils import menu, read_option, title,read_float, read_int, read_name
+from utils_module_u import menu, read_option, title,read_float, read_int, read_name
 from data import add_student, Student, print_data, is_database_exists, grab_data, delete_student, update_student
 from time import sleep
 

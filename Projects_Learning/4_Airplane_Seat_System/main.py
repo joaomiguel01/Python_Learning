@@ -1,6 +1,6 @@
 # Python Airplane Seat System
 
-from gui_utils import menu, read_option, title
+from utils_module_u import menu, read_option, title
 from time import sleep
 
 def main():
