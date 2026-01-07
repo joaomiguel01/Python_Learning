@@ -1,4 +1,3 @@
-# Static Lists
 """
 class NodeList:
     def __init__(self, key: int):
@@ -13,31 +12,34 @@ class NodeList:
         if isinstance(key, int):
             self._key = key
         else:
-            raise ValueError("ERROR: Invalid key!")
+            raise ValueError("ERROR: The key must be a integer number!")
+    
 
+    
 
-
+    def __str__(self):
+        return f"{self.key}"
+    
 
     def __repr__(self):
         return f"{self.key}"
 
-
-class List:
-    def __init__(self, max_length: int):
-        self.max_length = max_length
+class StaticList:
+    def __init__(self, M_numbers: int):
+        self.M_numbers = M_numbers
         self.last_pos = -1
-        self.datas = [None for n in range(self.max_length)]
+        self.datas = [None for n in range(M_numbers)]
 
 
     @property
-    def max_length(self):
-        return self._max_length
-    @max_length.setter
-    def max_length(self, max_length: int):
-        if isinstance(max_length, int) and max_length >= 0:
-            self._max_length = max_length
+    def M_numbers(self):
+        return self._M_numbers
+    @M_numbers.setter
+    def M_numbers(self, M_numbers: int):
+        if isinstance(M_numbers, int) and M_numbers > 0:
+            self._M_numbers = M_numbers
         else:
-            raise ValueError("ERROR: The max_length must be greater than or equal to 0!")
+            raise ValueError("ERROR: The M_numbers must be a positive number!")
     
 
     @property
@@ -45,65 +47,233 @@ class List:
         return self._last_pos
     @last_pos.setter
     def last_pos(self, last_pos: int):
-        if isinstance(last_pos, int) and -1 <= last_pos < self.max_length:
+        if isinstance(last_pos, int) and -1 <= last_pos < self.M_numbers:
             self._last_pos = last_pos
         else:
-            raise ValueError("ERROR: The last_pos must be between -1 and (max_length - 1)!")
+            raise ValueError("ERROR: The last_pos must be between -1 and (M_numbers - 1)!")
     
 
-    @property
-    def datas(self):
-        return self._datas
-    @datas.setter
-    def datas(self, datas: list):
-        if isinstance(datas, list):
-            self._datas = datas
-        else:
-            raise ValueError("ERROR: The datas must be a list!")
-    
 
-    
 
-    def search_element(self, value: int):
-        for i in range(self.last_pos + 1):
-            if self.datas[i].key == value:
+    def search_element(self, key: int):
+        for i in range(self.last_pos+1):
+            if self.datas[i] is not None and self.datas[i].key == key:
                 return i
         return -1
-    
 
-    def add_element(self, node: NodeList):
-        if self.last_pos < self.max_length-1:
+
+    def add_element(self, key: int):
+        node = NodeList(key)
+
+        if self.last_pos < self.M_numbers - 1:
             if self.search_element(node.key) == -1:
                 self.last_pos += 1
                 self.datas[self.last_pos] = node
             else:
                 raise ValueError("ERROR: This element already exists!")
         else:
-            raise IndexError("ERROR: The list is full!")
+            raise IndexError("ERROR: Static list is full!")
     
 
-    def delete_element(self, node_key: int):
+    def delete_element(self, key: int):
         if self.last_pos != -1:
-            index = self.search_element(node_key)
+            index = self.search_element(key)
             if index != -1:
                 for i in range(index, self.last_pos):
                     self.datas[i] = self.datas[i+1]
                 self.datas[self.last_pos] = None
                 self.last_pos -= 1
             else:
-                raise ValueError("ERROR: This value doesn't exist!")
+                raise ValueError("ERROR: Element not found!")
         else:
-            raise IndexError("ERROR: The list is empty!")
-
+            raise IndexError("ERROR: Static list is empty!")
 
 
 
     def __str__(self):
-        return f"{[self.datas[i] for i in range(self.last_pos + 1)]}"
+        return f"{[self.datas[i] for i in range(self.last_pos+1) if self.datas[i] is not None]}"
+    
+
+    def __repr__(self):
+        return f"{[self.datas[i] for i in range(self.last_pos+1) if self.datas[i] is not None]}"
 """
 
+"""
+class NodeStack:
+    def __init__(self, key: int):
+        self.key = key
 
 
+    @property
+    def key(self):
+        return self._key
+    @key.setter
+    def key(self, key: int):
+        if isinstance(key, int):
+            self._key = key
+        else:
+            raise ValueError("ERROR: The key must be a integer number!")
+
+
+    
+
+    def __str__(self):
+        return f"{self.key}"
+    
+
+    def __repr__(self):
+        return f"{self.key}"
+
+class Stack:
+    def __init__(self, m_numbers: int):
+        self.m_numbers = m_numbers
+        self.top = -1
+        self.datas = [None for n in range(self.m_numbers)]
+
+    @property
+    def m_numbers(self):
+        return self._m_numbers
+    @m_numbers.setter
+    def m_numbers(self, m_numbers: int):
+        if isinstance(m_numbers, int) and m_numbers > 0:
+            self._m_numbers = m_numbers
+        else:
+            raise ValueError("ERROR: The m_numbers must be a positive number!")
+
+    
+    @property
+    def top(self):
+        return self._top
+    @top.setter
+    def top(self, top: int):
+        if isinstance(top, int) and -1 <= top < self.m_numbers:
+            self._top = top
+        else:
+            raise ValueError("ERROR: The top value must be between -1 and (m_numbers-1)!")
+    
+
+    def push(self, key: int):
+        if self.top < self.m_numbers - 1:
+            node = NodeStack(key)
+            self.top += 1
+            self.datas[self.top] = node
+        else:
+            raise IndexError("Overflow!")
+
+
+    def pop(self):
+        if self.top != -1:
+            node = self.datas[self.top]
+            self.datas[self.top] = None
+            self.top -= 1
+            return node
+        else:
+            raise IndexError("Underflow!")
+
+
+
+
+    def __repr__(self):
+        return f"{[self.datas[i] for i in range(self.top+1)]}"
+    
+
+    def __str__(self):
+        return f"{[self.datas[i] for i in range(self.top+1)]}"
+"""
+
+"""
+class NodeQueue:
+    def __init__(self, key: int):
+        self.key = key
+
+
+    @property
+    def key(self):
+        return self._key
+    @key.setter
+    def key(self, key: int):
+        if isinstance(key, int):
+            self._key = key
+        else:
+            raise ValueError("ERROR: The key must be a integer number!")
+    
+
+
+
+    def __str__(self):
+        return f"{self.key}"
+    
+    
+    def __repr__(self):
+        return f"{self.key}"
+
+class Queue:
+    def __init__(self, m_values: int):
+        self.m_values = m_values
+        self.start_pos = 0
+        self.last_pos = -1
+        self.datas = [None for n in range(self.m_values)]
+
+    
+    @property
+    def m_values(self):
+        return self._m_values
+    @m_values.setter
+    def m_values(self, m_values: int):
+        if isinstance(m_values, int) and m_values > 0:
+            self._m_values = m_values
+        else:
+            raise ValueError("ERROR: The m_value must be a positive number!")
+    
+
+    @property
+    def last_pos(self):
+        return self._last_pos
+    @last_pos.setter
+    def last_pos(self, last_pos: int):
+        if isinstance(last_pos, int) and -1 <= last_pos < self.m_values:
+            self._last_pos = last_pos
+        else:
+            raise ValueError("ERROR: The last_pos must be between -1 and (m_values - 1)!")
+    
+
+    @property
+    def start_pos(self):
+        return self._start_pos
+    @start_pos.setter
+    def start_pos(self, start_pos: int):
+        if isinstance(start_pos, int) and 0 <= start_pos < self.m_values:
+            self._start_pos = start_pos
+        else:
+            raise ValueError("ERROR: The start_pos must be between 0 and (m_values - 1)!")
+
+
+    def add_element(self, key: int):
+        if self.last_pos == self.m_values - 1:
+            raise IndexError("Overflow!")
+        
+        node = NodeQueue(key)
+        self.last_pos += 1
+        self.datas[self.last_pos] = node
+
+
+    def delete_elemet(self):
+        if self.start_pos > self.last_pos:
+            raise IndexError("ERROR: Underflow!")
+        
+        node = self.datas[self.start_pos]
+        self.datas[self.start_pos] = None
+        self.start_pos += 1
+        return node
+
+    def __str__(self):
+        return f"{self.datas}"
+
+
+    def __repr__(self):
+        return f"{self.datas}"
+"""
+        
 
 def main():
     pass
