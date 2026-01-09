@@ -273,7 +273,94 @@ class Queue:
     def __repr__(self):
         return f"{self.datas}"
 """
-        
+
+"""
+class NodeLinkList:
+    def __init__(self, key: int, after: "NodeLinkList | None"):
+        self.key = key
+        self.after = after
+
+
+    @property
+    def key(self):
+        return self._key
+    @key.setter
+    def key(self, key: int):
+        if isinstance(key, int):
+            self._key = key
+        else:
+            raise ValueError("ERROR: The key must be a integer number!")
+    
+
+    @property
+    def after(self):
+        return self._after
+    @after.setter
+    def after(self, after: "NodeLinkList | None"):
+        if isinstance(after, NodeLinkList) or after is None:
+            self._after = after
+        else:
+            raise ValueError("ERROR: The pointer must point to another node or None!")
+    
+
+
+    
+    def __str__(self):
+        return f"{self.key}"
+    def __repr__(self):
+        return f"{self.key}"
+    
+
+class LinkList:
+    @staticmethod
+    def print_data(head: NodeLinkList):
+        pont = head
+        while pont is not None:
+            print(f"{pont} ->", end=" ")
+            pont = pont.after
+        print("None")
+    
+
+    @staticmethod
+    def search_node(head: NodeLinkList, key: int):
+        pt = head
+        ant = None
+
+        while pt is not None:
+            if pt.key == key:
+                return ant, pt
+            ant = pt
+            pt = pt.after
+        return ant, None
+
+
+    @staticmethod
+    def add_node(head: NodeLinkList, key: int):
+        ant, pt = LinkList.search_node(head, key)
+        node = NodeLinkList(key, pt)
+        if pt is None:
+            if ant == None:
+                head.after = node
+            else:
+                ant.after = node
+
+            node.after = None 
+        else:
+            raise ValueError("ERROR: This element already exists!")
+
+    @staticmethod
+    def delete_element(head: NodeLinkList, key: int):
+        ant, pt = LinkList.search_node(head, key)
+        if pt is not None:
+            if ant == None:
+                raise ValueError("ERROR: Cannot remove the head node!")
+            
+            ant.after = pt.after
+            pt.after = None
+        else:
+            raise ValueError("ERROR: This node doesn't exist!")
+"""
+
 
 def main():
     pass
